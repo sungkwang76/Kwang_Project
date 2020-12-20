@@ -5,16 +5,16 @@ from datetime import datetime
 from slacker import Slacker
 import time, calendar
 
-slack = Slacker('')
+slack = Slacker('xoxb-1612806515408-1585877637253-XQhrjYGfjVj1ZOgB4AhCTV4v')
 def dbgout(message):
     """인자로 받은 문자열을 파이썬 셸과 슬랙으로 동시에 출력한다."""
     print(datetime.now().strftime('[%m/%d %H:%M:%S]'), message)
     strbuf = datetime.now().strftime('[%m/%d %H:%M:%S] ') + message
-    slack.chat.post_message('#etf-algo-trading', strbuf)
+    slack.chat.post_message('#stock', strbuf)
 
 def printlog(message, *args):
     """인자로 받은 문자열을 파이썬 셸에 출력한다."""
-    print(datetime.now().strftime('[%m/%d %H:%M:%S]'), message, *a  rgs)
+    print(datetime.now().strftime('[%m/%d %H:%M:%S]'), message, *args)
  
 # 크레온 플러스 공통 OBJECT
 cpCodeMgr = win32com.client.Dispatch('CpUtil.CpStockCode')
@@ -246,8 +246,8 @@ if __name__ == '__main__':
         symbol_list = ['A122630', 'A252670', 'A233740', 'A250780', 'A225130',
              'A280940', 'A261220', 'A217770', 'A295000', 'A176950']
         bought_list = []     # 매수 완료된 종목 리스트
-        target_buy_count = 5 # 매수할 종목 수
-        buy_percent = 0.19   
+        target_buy_count = 4 # 매수할 종목 수
+        buy_percent = 0.25   
         printlog('check_creon_system() :', check_creon_system())  # 크레온 접속 점검
         stocks = get_stock_balance('ALL')      # 보유한 모든 종목 조회
         total_cash = int(get_current_cash())   # 100% 증거금 주문 가능 금액 조회
@@ -256,7 +256,7 @@ if __name__ == '__main__':
         printlog('종목별 주문 비율 :', buy_percent)
         printlog('종목별 주문 금액 :', buy_amount)
         printlog('시작 시간 :', datetime.now().strftime('%m/%d %H:%M:%S'))
-        soldout = False;
+        soldout = False
 
         while True:
             t_now = datetime.now()
